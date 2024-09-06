@@ -24,7 +24,7 @@ function displayProducts() {
         tableBody.appendChild(row);
     });
 }
-// Function to handle adding a new product without validation
+// Function to handle adding a new product with validation
 function addProduct() {
     var nameInput = document.getElementById('productName');
     var quantityInput = document.getElementById('productQuantity');
@@ -36,6 +36,19 @@ function addProduct() {
     var productName = nameInput.value.trim();
     var productQuantity = parseInt(quantityInput.value, 10);
     var productPrice = parseFloat(priceInput.value);
+    // Validation checks
+    if (productName === '') {
+        alert('Product name cannot be empty.');
+        return;
+    }
+    if (isNaN(productQuantity) || productQuantity <= 0) {
+        alert('Quantity must be a positive number.');
+        return;
+    }
+    if (isNaN(productPrice) || productPrice <= 0) {
+        alert('Price must be a valid positive number.');
+        return;
+    }
     // Create a new product object
     var newProduct = {
         name: productName,
