@@ -38,64 +38,8 @@ function displayProducts() {
     });
 }
 
-// Function to handle adding a new product with validation
-function addProduct() {
-    const nameInput = document.getElementById('productName') as HTMLInputElement | null;
-    const quantityInput = document.getElementById('productQuantity') as HTMLInputElement | null;
-    const priceInput = document.getElementById('productPrice') as HTMLInputElement | null;
-
-    if (!nameInput || !quantityInput || !priceInput) {
-        alert('Some input fields are missing.');
-        return;
-    }
-
-    const productName = nameInput.value.trim();
-    const productQuantity = parseInt(quantityInput.value, 10);
-    const productPrice = parseFloat(priceInput.value);
-
-    // Validation checks
-    if (productName === '') {
-        alert('Product name cannot be empty.');
-        return;
-    }
-    if (isNaN(productQuantity) || productQuantity <= 0) {
-        alert('Quantity must be a positive number.');
-        return;
-    }
-    if (isNaN(productPrice) || productPrice <= 0) {
-        alert('Price must be a valid positive number.');
-        return;
-    }
-
-    // Create a new product object
-    const newProduct: Product = {
-        name: productName,
-        quantity: productQuantity,
-        price: productPrice
-    };
-
-    // Add the new product to the products array
-    products.push(newProduct);
-
-    // Clear the input fields
-    nameInput.value = '';
-    quantityInput.value = '';
-    priceInput.value = '';
-
-    // Update the table with the new product
-    displayProducts();
-}
-
 // Ensure the DOM is fully loaded before executing the script
 document.addEventListener('DOMContentLoaded', () => {
     // Display initial products
     displayProducts();
-
-    // Attach the event listener to the Add Product button
-    const addProductButton = document.getElementById('addProductBtn') as HTMLButtonElement | null;
-    if (addProductButton) {
-        addProductButton.addEventListener('click', addProduct);
-    } else {
-        console.error('Add Product button not found.');
-    }
 });
